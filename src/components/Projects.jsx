@@ -1,38 +1,57 @@
-import { motion } from "framer-motion";
+import ProjectCard from "./ProjectCard";
 
-const ProjectCard = ({ title, description, tags = [], imageUrl }) => {
+const dummyProjects = [
+  {
+    title: "AI Image Generator",
+    description: "A web app that generates realistic images from text prompts using OpenAI's DALL·E API.",
+    tags: ["React", "Tailwind", "OpenAI", "Framer Motion"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+  {
+    title: "Portfolio Website",
+    description: "Personal portfolio showcasing projects, skills, and contact info, with dark/light mode toggle.",
+    tags: ["React", "Framer Motion", "Tailwind"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+  {
+    title: "Weather Dashboard",
+    description: "Responsive weather app with location search and real-time data from OpenWeatherMap API.",
+    tags: ["JavaScript", "API", "Responsive UI"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+  {
+    title: "Task Manager",
+    description: "Task manager with drag-and-drop, filtering, and persistent local storage.",
+    tags: ["React", "Drag & Drop", "LocalStorage"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+  {
+    title: "Weather Dashboard",
+    description: "Responsive weather app with location search and real-time data from OpenWeatherMap API.",
+    tags: ["JavaScript", "API", "Responsive UI"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+  {
+    title: "Task Manager",
+    description: "Task manager with drag-and-drop, filtering, and persistent local storage.",
+    tags: ["React", "Drag & Drop", "LocalStorage"],
+    imageUrl: "https://as1.ftcdn.net/v2/jpg/03/93/37/24/1000_F_393372407_u34qDqrJuvMZICQC0oKnKgEUi8XqVPJG.jpg",
+  },
+];
+
+const Projects = () => {
   return (
-    <motion.div 
-      className="bg-black/50 rounded-xl overflow-hidden border border-purple-900/50 shadow-lg shadow-purple-500/10 hover:shadow-purple-500/30 transition-all duration-300"
-      whileHover={{ y: -10 }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="h-48 overflow-hidden">
-        <img 
-          src={imageUrl} 
-          alt={title} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-        />
+    <section id="projects" className="py-16 bg-black text-white px-4 md:px-20">
+      <h2 className="text-3xl font-bold text-purple-400 mb-10 text-center">
+        My Projects
+      </h2>
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {dummyProjects.map((project, index) => (
+          <ProjectCard key={index} {...project} />
+        ))}
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-purple-400 mb-2">{title}</h3>
-        <p className="text-gray-300 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag, index) => (
-            <span 
-              key={index}
-              className="text-xs bg-purple-900/50 text-purple-300 px-3 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
+    </section>
   );
 };
 
-export default ProjectCard;
+export default Projects;

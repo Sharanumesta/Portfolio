@@ -69,7 +69,7 @@ const Navbar = () => {
       animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
       transition={{ type: "spring", damping: 20, stiffness: 300 }}
     >
-      <div className="h-20 flex items-center justify-between px-4 md:px-20 max-w-7xl mx-auto">
+      <div className="h-20 flex items-center justify-between md:px-5 max-w-7xl mx-auto p-4">
         {/* Logo */}
         <motion.div
           className="text-purple-500 font-bold text-2xl"
