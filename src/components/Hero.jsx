@@ -20,7 +20,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          {/* <TypeAnimation
+          <TypeAnimation
             sequence={[
               "Frontend Developer",
               1000,
@@ -34,7 +34,7 @@ const Hero = () => {
             wrapper="span"
             speed={50}
             repeat={Infinity}
-          /> */}
+          />
         </motion.div>
 
         <motion.div

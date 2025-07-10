@@ -93,14 +93,11 @@ const Navbar = () => {
             >
               <Link
                 to={`#${item.toLowerCase()}`}
-                className="hover:text-purple-300 transition duration-200"
+                className="hover:text-purple-300 transition-colors duration-300"
               >
                 {item}
               </Link>
-              <motion.div
-                className="absolute bottom-0 left-0 h-0.5 bg-purple-500 w-0 group-hover:w-full"
-                transition={{ duration: 0.3 }}
-              />
+              <motion.div className="absolute bottom-0 left-0 h-0.5 bg-purple-500 w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
             </motion.li>
           ))}
 
@@ -111,12 +108,11 @@ const Navbar = () => {
               className="ml-4 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300"
               aria-label="Toggle Dark Mode"
             >
-            
-                <FontAwesomeIcon
-                  icon={darkMode ? faSun : faMoon}
-                  size="lg"
-                  color={darkMode ? "#facc15" : "#4b5563"}
-                />
+              <FontAwesomeIcon
+                icon={darkMode ? faSun : faMoon}
+                size="lg"
+                color={darkMode ? "#facc15" : "#4b5563"}
+              />
             </button>
           </li>
         </ul>
@@ -136,11 +132,11 @@ const Navbar = () => {
             className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300"
             aria-label="Toggle Dark Mode"
           >
-              <FontAwesomeIcon
-                icon={darkMode ? faSun : faMoon}
-                size="lg"
-                color={darkMode ? "#facc15" : "#4b5563"}
-              />
+            <FontAwesomeIcon
+              icon={darkMode ? faSun : faMoon}
+              size="lg"
+              color={darkMode ? "#facc15" : "#4b5563"}
+            />
           </button>
 
           {/* Hamburger */}
@@ -165,7 +161,7 @@ const Navbar = () => {
                 {navItems.map((item, index) => (
                   <motion.li
                     key={item}
-                    className="text-purple-400 font-semibold text-2xl"
+                    className="text-purple-400 font-semibold text-2xl relative group"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
@@ -173,10 +169,12 @@ const Navbar = () => {
                   >
                     <Link
                       to={`#${item.toLowerCase()}`}
-                      className="hover:text-purple-300 transition duration-200"
+                      className="hover:text-purple-300 transition-colors duration-300"
                     >
                       {item}
                     </Link>
+                    {/* Underline */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-purple-500 w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
                   </motion.li>
                 ))}
               </motion.ul>
