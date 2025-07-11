@@ -1,15 +1,15 @@
-import Hero from './Hero';
-// import About from 'About';
-import SkillsSection from './Skills';
-import Projects from './Projects';
+import Hero from "./Hero";
+import About from "./About";
+import Skills from "./Skills";
+import Projects from "./Projects";
 
 const Home = () => {
   return (
     <>
-      <Hero id="home" />
-      {/* <About id="about" /> */}
-      <SkillsSection id="skills" />
-      <Projects id="projects" />
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
     </>
   );
 };

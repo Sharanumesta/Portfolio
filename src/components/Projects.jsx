@@ -42,8 +42,8 @@ const dummyProjects = [
 const Projects = () => {
   return (
     <section id="projects" className="py-16 bg-black text-white px-4 md:px-20">
-      <h2 className="text-3xl font-bold text-purple-400 mb-10 text-center">
-        My Projects
+      <h2 className="text-3xl font-bold text-white mb-15 text-center">
+        My <span className="text-purple-400">Projects</span>
       </h2>
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {dummyProjects.map((project, index) => (

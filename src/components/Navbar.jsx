@@ -12,7 +12,6 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +57,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["Home", "About", "Projects", "Skills", "Resume", "Contact"];
+  const navItems = ["Home", "About", "Skills", "Projects", "Resume", "Contact"];
 
   return (
     <motion.nav
@@ -91,12 +90,12 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
             >
-              <Link
-                to={`#${item.toLowerCase()}`}
-                className="hover:text-purple-300 transition-colors duration-300"
+              <a
+                href={`#${item.toLowerCase()}`}
+                className="hover:text-purple-400 transition-colors duration-300"
               >
                 {item}
-              </Link>
+              </a>
               <motion.div className="absolute bottom-0 left-0 h-0.5 bg-purple-500 w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
             </motion.li>
           ))}
@@ -167,12 +166,12 @@ const Navbar = () => {
                     transition={{ delay: 0.1 * index }}
                     onClick={() => setIsOpen(false)}
                   >
-                    <Link
-                      to={`#${item.toLowerCase()}`}
-                      className="hover:text-purple-300 transition-colors duration-300"
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="hover:text-purple-400 transition-colors duration-300"
                     >
                       {item}
-                    </Link>
+                    </a>
                     {/* Underline */}
                     <div className="absolute bottom-0 left-0 h-0.5 bg-purple-500 w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
                   </motion.li>
