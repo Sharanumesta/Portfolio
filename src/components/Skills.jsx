@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
 import {
   FaReact,
   FaNodeJs,
@@ -66,34 +67,28 @@ const skills = [
 ];
 
 const Category = ({ title, list }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const cardRef = useRef(null);
   
-  // Smoother motion values with springs
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
   const smoothRotateX = useSpring(rotateX, { damping: 15, stiffness: 150 });
   const smoothRotateY = useSpring(rotateY, { damping: 15, stiffness: 150 });
 
-  // Stronger tilt parameters
-  const maxTilt = 20; // Increased from 8 for more dramatic effect
+  const maxTilt = 15;
   const perspective = 1000;
-  const responseFactor = 0.75; // More responsive to mouse movement
+  const responseFactor = 0.7;
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
-    
-    // Get mouse position relative to card
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
-    // Calculate center
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
-    // Calculate tilt with stronger effect
     const tiltX = ((y - centerY) / centerY) * -maxTilt * responseFactor;
     const tiltY = ((x - centerX) / centerX) * maxTilt * responseFactor;
 
@@ -102,7 +97,6 @@ const Category = ({ title, list }) => {
   };
 
   const handleMouseLeave = () => {
-    // Smooth reset to zero
     rotateX.set(0);
     rotateY.set(0);
   };
@@ -112,7 +106,11 @@ const Category = ({ title, list }) => {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group h-auto md:h-48 flex flex-col justify-start bg-purple-900/10 border border-purple-700/40 rounded-2xl p-6 backdrop-blur-md shadow-md relative overflow-hidden"
+      className={`group h-auto md:h-48 flex flex-col justify-start rounded-2xl p-6 backdrop-blur-md shadow-md relative overflow-hidden border transition-colors duration-300 ${
+        isDark
+          ? "bg-purple-900/10 border-purple-700/40"
+          : "bg-white/90 border-purple-300/40"
+      }`}
       style={{
         rotateX: smoothRotateX,
         rotateY: smoothRotateY,
@@ -128,18 +126,22 @@ const Category = ({ title, list }) => {
       viewport={{ once: true, margin: "0px 0px -50px 0px" }}
       whileTap={{ scale: 0.98 }}
     >
-      <h3 className="text-purple-400 text-xl font-semibold mb-8 text-center relative z-10">
+      <h3 className={`text-xl font-semibold mb-8 text-center relative z-10 ${
+        isDark ? "text-purple-400" : "text-purple-600"
+      }`}>
         {title}
       </h3>
       
-      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-300 relative z-10">
+      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 relative z-10">
         {list.map((skill, idx) => (
           <motion.li
             key={idx}
-            className="flex items-center gap-2 hover:text-purple-300 cursor-default"
+            className={`flex items-center gap-2 cursor-default ${
+              isDark ? "text-gray-300 hover:text-purple-300" : "text-gray-700 hover:text-purple-600"
+            }`}
             whileHover={{
               scale: 1.05,
-              x: 3, // Slightly stronger movement
+              x: 3,
               transition: { 
                 type: "spring", 
                 stiffness: 500,
@@ -148,10 +150,19 @@ const Category = ({ title, list }) => {
             }}
           >
             <motion.span
-              className="text-xl"
+              className={`text-xl ${
+                isDark 
+                  ? skill.icon.props.className?.includes('text-') 
+                    ? skill.icon.props.className 
+                    : "text-gray-400"
+                  : skill.icon.props.className?.includes('text-') 
+                    ? skill.icon.props.className.replace(/text-(.*?)-(\d+)/, (match, color, shade) => 
+                        `text-${color}-${Math.min(parseInt(shade) + 200)}`)
+                    : "text-gray-500"
+              }`}
               whileHover={{ 
-                rotate: 15, // Increased rotation
-                scale: 1.2, // Stronger scale
+                rotate: 15,
+                scale: 1.2,
                 transition: { type: "spring", stiffness: 400 }
               }}
             >
@@ -166,13 +177,22 @@ const Category = ({ title, list }) => {
 };
 
 const Skills = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <section
       id="skills"
-      className="py-24 px-6 md:px-20 bg-gradient-to-b from-black to-purple-900/10 "
+      className={`py-24 px-6 md:px-20 transition-colors duration-300 ${
+        isDark 
+          ? "bg-gradient-to-b from-gray-900 to-purple-900/10" 
+          : "bg-gradient-to-b from-gray-50 to-purple-50"
+      }`}
     >
       <motion.h2
-        className="text-4xl font-bold text-center text-white mb-16"
+        className={`text-4xl font-bold text-center mb-16 ${
+          isDark ? "text-white" : "text-gray-800"
+        }`}
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

@@ -19,7 +19,6 @@ const Home = () => {
       >
         <Hero />
       </motion.div>
-
       <motion.div
         {...sectionAnimation}
         viewport={{ once: true }}

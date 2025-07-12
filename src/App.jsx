@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import { useTheme } from "./context/ThemeContext";
 
 // Scroll-based animation settings
 const sectionAnimation = {
@@ -13,12 +13,18 @@ const sectionAnimation = {
 };
 
 const App = () => {
+  const { theme } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
+  // Apply theme class to HTML element
+  useEffect(() => {
+    document.documentElement.className = theme === "dark" ? "dark" : "";
+  }, [theme]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,7 +62,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
+    <div className={`min-h-screen font-sans antialiased transition-colors duration-300 ${
+      theme === "dark" ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"
+    }`}>
       {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-purple-500 z-50 origin-left"
