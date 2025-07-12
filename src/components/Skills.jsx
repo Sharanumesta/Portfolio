@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 import {
   FaReact,
   FaNodeJs,
@@ -17,6 +18,7 @@ import {
   SiPostman,
 } from "react-icons/si";
 import { BiData } from "react-icons/bi";
+
 const skills = [
   {
     title: "Frontend",
@@ -63,48 +65,105 @@ const skills = [
   },
 ];
 
-const Category = ({ title, list }) => (
-  <motion.div
-    className="h-48 flex flex-col justify-start bg-purple-900/10 border border-purple-700/40 rounded-2xl p-6 backdrop-blur-md shadow-md relative overflow-hidden transform transition-transform duration-500 hover:scale-105"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    whileHover={{
-      boxShadow: "0 10px 25px -5px rgba(168, 85, 247, 0.4)",
-      transition: { type: "spring", stiffness: 300 },
-    }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true }}
-  >
-    {/* Background highlight on hover */}
-    <motion.div
-      className="absolute inset-0 bg-purple-900/10 z-0"
-      initial={{ opacity: 0 }}
-      whileHover={{ opacity: 0.2 }}
-      transition={{ duration: 0.3 }}
-    />
+const Category = ({ title, list }) => {
+  const cardRef = useRef(null);
+  
+  // Smoother motion values with springs
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const smoothRotateX = useSpring(rotateX, { damping: 15, stiffness: 150 });
+  const smoothRotateY = useSpring(rotateY, { damping: 15, stiffness: 150 });
 
-    <h3 className="text-purple-400 text-xl font-semibold mb-8 text-center relative z-10">
-      {title}
-    </h3>
-    <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-300 relative z-10">
-      {list.map((skill, idx) => (
-        <motion.li
-          key={idx}
-          className="flex items-center gap-2 hover:text-purple-300"
-          whileHover={{
-            scale: 1.05,
-            transition: { type: "spring", stiffness: 400 },
-          }}
-        >
-          <motion.span className="text-xl" whileHover={{ rotate: 10 }}>
-            {skill.icon}
-          </motion.span>
-          {skill.name}
-        </motion.li>
-      ))}
-    </ul>
-  </motion.div>
-);
+  // Stronger tilt parameters
+  const maxTilt = 20; // Increased from 8 for more dramatic effect
+  const perspective = 1000;
+  const responseFactor = 0.75; // More responsive to mouse movement
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    
+    // Get mouse position relative to card
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Calculate center
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate tilt with stronger effect
+    const tiltX = ((y - centerY) / centerY) * -maxTilt * responseFactor;
+    const tiltY = ((x - centerX) / centerX) * maxTilt * responseFactor;
+
+    rotateX.set(tiltX);
+    rotateY.set(tiltY);
+  };
+
+  const handleMouseLeave = () => {
+    // Smooth reset to zero
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group h-auto md:h-48 flex flex-col justify-start bg-purple-900/10 border border-purple-700/40 rounded-2xl p-6 backdrop-blur-md shadow-md relative overflow-hidden"
+      style={{
+        rotateX: smoothRotateX,
+        rotateY: smoothRotateY,
+        transformPerspective: perspective,
+        transformStyle: "preserve-3d",
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ 
+        opacity: 1, 
+        y: 0,
+        transition: { type: "spring", damping: 15, stiffness: 100 }
+      }}
+      viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+      whileTap={{ scale: 0.98 }}
+    >
+      <h3 className="text-purple-400 text-xl font-semibold mb-8 text-center relative z-10">
+        {title}
+      </h3>
+      
+      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-300 relative z-10">
+        {list.map((skill, idx) => (
+          <motion.li
+            key={idx}
+            className="flex items-center gap-2 hover:text-purple-300 cursor-default"
+            whileHover={{
+              scale: 1.05,
+              x: 3, // Slightly stronger movement
+              transition: { 
+                type: "spring", 
+                stiffness: 500,
+                damping: 10
+              }
+            }}
+          >
+            <motion.span
+              className="text-xl"
+              whileHover={{ 
+                rotate: 15, // Increased rotation
+                scale: 1.2, // Stronger scale
+                transition: { type: "spring", stiffness: 400 }
+              }}
+            >
+              {skill.icon}
+            </motion.span>
+            {skill.name}
+          </motion.li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+};
 
 const Skills = () => {
   return (
@@ -119,10 +178,10 @@ const Skills = () => {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        Tech <span className="text-purple-400">Stack</span>
+        Tech <span className="text-purple-500">Stack</span>
       </motion.h2>
 
-      <div className="grid gap-10 grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto">
+      <div className="grid gap-10 grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto my-auto">
         {skills.map((category, index) => (
           <div
             key={index}

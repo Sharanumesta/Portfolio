@@ -3,7 +3,7 @@ import { TypeAnimation } from "react-type-animation";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-purple-900/10 px-4">
+    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-purple-900/10 px-4">
       <div className="text-center max-w-4xl">
         <motion.h1
           className="text-4xl md:text-6xl font-bold text-white mb-6"
@@ -11,7 +11,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Hi, I'm <span className="text-purple-400">Sharanu</span>
+          Hi, I'm <span className="text-purple-500">Sharanu</span>
         </motion.h1>
 
         <motion.div

@@ -5,11 +5,14 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 
-const App = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+// Scroll-based animation settings
+const sectionAnimation = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
 
+const App = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -17,6 +20,11 @@ const App = () => {
     restDelta: 0.001,
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Custom cursor effect
   useEffect(() => {
     const cursor = document.createElement("div");
     cursor.classList.add("custom-cursor");
@@ -27,33 +35,35 @@ const App = () => {
       cursor.style.top = `${e.clientY}px`;
     };
 
-    document.addEventListener("mousemove", moveCursor);
+    const addCursorHover = (e) => cursor.classList.add("cursor-hover");
+    const removeCursorHover = (e) => cursor.classList.remove("cursor-hover");
 
-    const hoverElements = document.querySelectorAll("a, button, .hover-effect");
-    hoverElements.forEach((el) => {
-      el.addEventListener("mouseenter", () =>
-        cursor.classList.add("cursor-hover")
-      );
-      el.addEventListener("mouseleave", () =>
-        cursor.classList.remove("cursor-hover")
-      );
+    document.addEventListener("mousemove", moveCursor);
+    const hoverTargets = document.querySelectorAll("a, button, .hover-effect");
+    hoverTargets.forEach((el) => {
+      el.addEventListener("mouseenter", addCursorHover);
+      el.addEventListener("mouseleave", removeCursorHover);
     });
 
     return () => {
       document.removeEventListener("mousemove", moveCursor);
+      hoverTargets.forEach((el) => {
+        el.removeEventListener("mouseenter", addCursorHover);
+        el.removeEventListener("mouseleave", removeCursorHover);
+      });
       document.body.removeChild(cursor);
     };
   }, []);
 
   return (
     <div className="bg-black text-white min-h-screen font-sans antialiased">
-      {/* Scroll progress indicator */}
+      {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-purple-500 z-50 origin-left"
         style={{ scaleX }}
       />
 
-      {/* Custom cursor */}
+      {/* Custom cursor styles */}
       <style jsx="true" global="true">{`
         .custom-cursor {
           position: fixed;
@@ -79,11 +89,18 @@ const App = () => {
         }
       `}</style>
 
-      <Navbar />
+      {/* Sections with animation */}
+      <motion.div {...sectionAnimation} viewport={{ once: true }}>
+        <Navbar />
+      </motion.div>
+
       <main>
         <Home />
       </main>
-      <Footer />
+
+      <motion.div {...sectionAnimation} viewport={{ once: true }}>
+        <Footer />
+      </motion.div>
 
       {/* Back to top button */}
       <motion.div
