@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <motion.footer
       id="contact"
-      className={`py-16 px-4 md:px-20 border-t transition-colors duration-300 ${
+      className={`pt-16 pb-10 px-4 md:px-20 border-t transition-colors duration-300 ${
         isDark
           ? "bg-gradient-to-t from-gray-900 via-purple-900/10 to-gray-900 border-purple-900/30"
           : "bg-gradient-to-t from-gray-50 via-purple-100 to-gray-50 border-purple-400/30"
@@ -81,14 +81,14 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className={`h-px w-full my-5 ${
+        <div className={`h-px w-full my-1 ${
           isDark
             ? "bg-gradient-to-r from-transparent via-purple-500 to-transparent"
             : "bg-gradient-to-r from-transparent via-purple-400 to-transparent"
         }`} />
 
         {/* Footer Info */}
-        <div className="flex flex-col md:flex-row justify-around items-center gap-4 text-sm">
+        <div className="flex flex-col md:flex-row justify-around items-center gap-2 text-sm">
           <motion.div
             className={`font-bold text-xl flex items-center ${
               isDark ? "text-purple-300" : "text-purple-600"
@@ -97,7 +97,7 @@ const Footer = () => {
           >
             <span className="text-purple-500">&lt;</span>
             <span className="text-purple-500 items-center">SHARANU</span>
-            <span className="text-purple-500">/&gt;</span>
+            <span className="text-purple-500">&nbsp;/&gt;</span>
           </motion.div>
 
           <p className={isDark ? "text-gray-500" : "text-gray-600"}>

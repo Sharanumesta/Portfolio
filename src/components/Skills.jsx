@@ -68,9 +68,9 @@ const skills = [
 
 const Category = ({ title, list }) => {
   const { theme } = useTheme();
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
   const cardRef = useRef(null);
-  
+
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
   const smoothRotateX = useSpring(rotateX, { damping: 15, stiffness: 150 });
@@ -82,7 +82,7 @@ const Category = ({ title, list }) => {
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
-    
+
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -118,52 +118,59 @@ const Category = ({ title, list }) => {
         transformStyle: "preserve-3d",
       }}
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ 
-        opacity: 1, 
+      whileInView={{
+        opacity: 1,
         y: 0,
-        transition: { type: "spring", damping: 15, stiffness: 100 }
+        transition: { type: "spring", damping: 15, stiffness: 100 },
       }}
       viewport={{ once: true, margin: "0px 0px -50px 0px" }}
       whileTap={{ scale: 0.98 }}
     >
-      <h3 className={`text-xl font-semibold mb-8 text-center relative z-10 ${
-        isDark ? "text-purple-400" : "text-purple-600"
-      }`}>
+      <h3
+        className={`text-xl font-semibold mb-8 text-center relative z-10 ${
+          isDark ? "text-purple-400" : "text-purple-600"
+        }`}
+      >
         {title}
       </h3>
-      
+
       <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 relative z-10">
         {list.map((skill, idx) => (
           <motion.li
             key={idx}
             className={`flex items-center gap-2 cursor-default ${
-              isDark ? "text-gray-300 hover:text-purple-300" : "text-gray-700 hover:text-purple-600"
+              isDark
+                ? "text-gray-300 hover:text-purple-300"
+                : "text-gray-700 hover:text-purple-600"
             }`}
             whileHover={{
               scale: 1.05,
               x: 3,
-              transition: { 
-                type: "spring", 
+              transition: {
+                type: "spring",
                 stiffness: 500,
-                damping: 10
-              }
+                damping: 10,
+              },
             }}
           >
             <motion.span
               className={`text-xl ${
-                isDark 
-                  ? skill.icon.props.className?.includes('text-') 
-                    ? skill.icon.props.className 
+                isDark
+                  ? skill.icon.props.className?.includes("text-")
+                    ? skill.icon.props.className
                     : "text-gray-400"
-                  : skill.icon.props.className?.includes('text-') 
-                    ? skill.icon.props.className.replace(/text-(.*?)-(\d+)/, (match, color, shade) => 
-                        `text-${color}-${Math.min(parseInt(shade) + 200)}`)
-                    : "text-gray-500"
+                  : skill.icon.props.className?.includes("text-")
+                  ? skill.icon.props.className.replace(
+                      /text-(.*?)-(\d+)/,
+                      (match, color, shade) =>
+                        `text-${color}-${Math.min(parseInt(shade) + 200)}`
+                    )
+                  : "text-gray-500"
               }`}
-              whileHover={{ 
+              whileHover={{
                 rotate: 15,
                 scale: 1.2,
-                transition: { type: "spring", stiffness: 400 }
+                transition: { type: "spring", stiffness: 400 },
               }}
             >
               {skill.icon}
@@ -178,44 +185,54 @@ const Category = ({ title, list }) => {
 
 const Skills = () => {
   const { theme } = useTheme();
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
 
   return (
-    <section
-      id="skills"
-      className={`py-24 px-6 md:px-20 transition-colors duration-300 ${
-        isDark 
-          ? "bg-gradient-to-b from-gray-900 to-purple-900/10" 
-          : "bg-gradient-to-b from-gray-50 to-purple-50"
-      }`}
-    >
-      <motion.h2
-        className={`text-4xl font-bold text-center mb-16 ${
-          isDark ? "text-white" : "text-gray-800"
+    <>
+      <section
+        id="skills"
+        className={`py-24 px-6 md:px-20 transition-colors duration-300 ${
+          isDark
+            ? "bg-gradient-to-b from-gray-900 to-purple-900/10"
+            : "bg-gradient-to-b from-gray-50 to-purple-50"
         }`}
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
       >
-        Tech <span className="text-purple-500">Stack</span>
-      </motion.h2>
+        <motion.h2
+          className={`text-4xl font-bold text-center mb-16 ${
+            isDark ? "text-white" : "text-gray-800"
+          }`}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Tech <span className="text-purple-500">Stack</span>
+        </motion.h2>
 
-      <div className="grid gap-10 grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto my-auto">
-        {skills.map((category, index) => (
-          <div
-            key={index}
-            className={
-              skills.length % 2 !== 0 && index === skills.length - 1
-                ? "md:col-span-2 md:w-1/2 mx-auto"
-                : ""
-            }
-          >
-            <Category title={category.title} list={category.list} />
-          </div>
-        ))}
-      </div>
-    </section>
+        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto my-auto">
+          {skills.map((category, index) => (
+            <div
+              key={index}
+              className={
+                skills.length % 2 !== 0 && index === skills.length - 1
+                  ? "md:col-span-2 md:w-1/2 mx-auto"
+                  : ""
+              }
+            >
+              <Category title={category.title} list={category.list} />
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* Divider */}
+      <div
+        className={`h-px w-full my-1 ${
+          isDark
+            ? "bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+            : "bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+        }`}
+      />
+    </>
   );
 };
 

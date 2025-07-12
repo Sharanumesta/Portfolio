@@ -62,9 +62,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen font-sans antialiased transition-colors duration-300 ${
-      theme === "dark" ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"
-    }`}>
+    <div
+      className={`min-h-screen font-sans antialiased transition-colors duration-300 ${
+        theme === "dark"
+          ? "dark bg-gray-900 text-white"
+          : "bg-white text-gray-900"
+      }`}
+    >
       {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-purple-500 z-50 origin-left"
@@ -82,14 +86,24 @@ const App = () => {
           pointer-events: none;
           transform: translate(-50%, -50%);
           z-index: 9999;
-          mix-blend-mode: difference;
-          transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease;
+          background-color: transparent;
+          transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+            width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+            height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+            background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+            border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+            opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+          will-change: transform, background-color, opacity;
+          box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+          backdrop-filter: blur(2px);
         }
+
         .cursor-hover {
           transform: translate(-50%, -50%) scale(1.5);
           background-color: #a855f7;
           opacity: 0.5;
         }
+
         @media (pointer: coarse) {
           .custom-cursor {
             display: none;
