@@ -102,7 +102,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <a
+              <motion.a
                 href={`#${item.toLowerCase()}`}
                 className={`font-medium transition-colors duration-200 relative inline-block ${
                   theme === "dark"
@@ -110,15 +110,19 @@ const Navbar = () => {
                     : "text-gray-700 hover:text-purple-600"
                 }`}
                 onClick={() => setIsOpen(false)}
+                whileHover="hover"
               >
                 {item}
                 <motion.div
-                  className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400 w-0 group-hover:w-full transition-all duration-300 ease-out"
+                  className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400"
                   initial={{ width: 0 }}
-                  animate={{ width: "0" }}
-                  whileHover={{ width: "100%" }}
+                  animate={{ width: 0 }}
+                  variants={{
+                    hover: { width: "100%" },
+                  }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                 />
-              </a>
+              </motion.a>
             </motion.li>
           ))}
 

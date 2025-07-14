@@ -88,7 +88,7 @@ const Footer = () => {
         }`} />
 
         {/* Footer Info */}
-        <div className="flex flex-col md:flex-row justify-around items-center gap-2 text-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-2 text-sm px-4">
           <motion.div
             className={`font-bold text-xl flex items-center ${
               isDark ? "text-purple-300" : "text-purple-600"

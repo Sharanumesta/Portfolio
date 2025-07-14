@@ -16,9 +16,7 @@ const Hero = () => {
       <section
         id="home"
         className={`min-h-screen flex items-center justify-center px-4 transition-colors duration-300 ${
-          isDark
-            ? "bg-gradient-to-b from-gray-900 to-purple-900/10"
-            : "" // Changed to solid purple-100 background for light mode
+          isDark ? "bg-gradient-to-b from-gray-900 to-purple-900/10" : "" // Changed to solid purple-100 background for light mode
         }`}
       >
         <div className="text-center max-w-4xl">
