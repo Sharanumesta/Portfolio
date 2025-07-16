@@ -30,33 +30,33 @@ const dummyProjects = [
     githubUrl: "https://github.com/Sharanumesta/Portfolio",
     demoUrl: "https://portfolio-sharanu.netlify.app/"
   },
-  {
-    title: "Task Manager",
-    description: "Productivity app with drag-and-drop interface. Features task filtering and localStorage persistence.",
-    overview: "Transform your workflow with this intuitive task wizard! Glide through your to-dos with satisfying drag-and-drop interactions that make organization feel like play. Watch productivity soar as tasks complete themselves with delightful animations and clever categorization magic!",
-    tags: ["React", "Drag & Drop", "LocalStorage"],
-    imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b",
-    githubUrl: "https://github.com/yourusername/task-manager",
-    demoUrl: "https://task-manager-demo.vercel.app"
-  },
-  {
-    title: "E-commerce Platform",
-    description: "Complete online store with product catalog and cart. Includes search and category filtering.",
-    overview: "A shopping experience so smooth it feels like retail therapy! Browse beautifully presented products with instant search results and buttery-smooth transitions. The cart remembers your every whim, making checkout a breeze. Watch as products practically jump into your cart with delightful micro-interactions!",
-    tags: ["React", "Node.js", "MongoDB"],
-    imageUrl: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-    githubUrl: "https://github.com/yourusername/ecommerce-platform",
-    demoUrl: "https://ecommerce-demo.vercel.app"
-  },
-  {
-    title: "Recipe Finder",
-    description: "Application for discovering recipes based on available ingredients.",
-    overview: `Your culinary fairy godmother in app form! Wave goodbye to "what should I cook?" dilemmas as this magical tool transforms random ingredients into gourmet inspiration. Watch in awe as it conjures up perfect recipes from your pantry, complete with stunning food photography and step-by-step wizardry!`,
-    tags: ["React", "API", "Material UI"],
-    imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    githubUrl: "https://github.com/yourusername/recipe-finder",
-    demoUrl: "https://recipe-finder-demo.vercel.app"
-  }
+  // {
+  //   title: "Task Manager",
+  //   description: "Productivity app with drag-and-drop interface. Features task filtering and localStorage persistence.",
+  //   overview: "Transform your workflow with this intuitive task wizard! Glide through your to-dos with satisfying drag-and-drop interactions that make organization feel like play. Watch productivity soar as tasks complete themselves with delightful animations and clever categorization magic!",
+  //   tags: ["React", "Drag & Drop", "LocalStorage"],
+  //   imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b",
+  //   githubUrl: "https://github.com/yourusername/task-manager",
+  //   demoUrl: "https://task-manager-demo.vercel.app"
+  // },
+  // {
+  //   title: "E-commerce Platform",
+  //   description: "Complete online store with product catalog and cart. Includes search and category filtering.",
+  //   overview: "A shopping experience so smooth it feels like retail therapy! Browse beautifully presented products with instant search results and buttery-smooth transitions. The cart remembers your every whim, making checkout a breeze. Watch as products practically jump into your cart with delightful micro-interactions!",
+  //   tags: ["React", "Node.js", "MongoDB"],
+  //   imageUrl: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
+  //   githubUrl: "https://github.com/yourusername/ecommerce-platform",
+  //   demoUrl: "https://ecommerce-demo.vercel.app"
+  // },
+  // {
+  //   title: "Recipe Finder",
+  //   description: "Application for discovering recipes based on available ingredients.",
+  //   overview: `Your culinary fairy godmother in app form! Wave goodbye to "what should I cook?" dilemmas as this magical tool transforms random ingredients into gourmet inspiration. Watch in awe as it conjures up perfect recipes from your pantry, complete with stunning food photography and step-by-step wizardry!`,
+  //   tags: ["React", "API", "Material UI"],
+  //   imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+  //   githubUrl: "https://github.com/yourusername/recipe-finder",
+  //   demoUrl: "https://recipe-finder-demo.vercel.app"
+  // }
 ];
 const Projects = () => {
   const { theme } = useTheme();

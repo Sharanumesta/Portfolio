@@ -55,6 +55,11 @@ const Navbar = () => {
 
   const navItems = ["Home", "About", "Skills", "Projects", "Resume", "Contact"];
 
+  const handleResumeClick = () => {
+    window.open("https://drive.google.com/file/d/1W-L0lsvoNRzmdgS7Fsh-XWCaX-ePBqaO/view", "_blank");
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav
       className={`fixed top-0 w-full z-50 ${
@@ -102,27 +107,50 @@ const Navbar = () => {
                 },
               }}
             >
-              <motion.a
-                href={`#${item.toLowerCase()}`}
-                className={`font-medium transition-colors duration-200 relative inline-block ${
-                  theme === "dark"
-                    ? "text-gray-300 hover:text-purple-400"
-                    : "text-gray-700 hover:text-purple-600"
-                }`}
-                onClick={() => setIsOpen(false)}
-                whileHover="hover"
-              >
-                {item}
-                <motion.div
-                  className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400"
-                  initial={{ width: 0 }}
-                  animate={{ width: 0 }}
-                  variants={{
-                    hover: { width: "100%" },
-                  }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                />
-              </motion.a>
+              {item === "Resume" ? (
+                <motion.button
+                  onClick={handleResumeClick}
+                  className={`font-medium transition-colors duration-200 relative inline-block ${
+                    theme === "dark"
+                      ? "text-gray-300 hover:text-purple-400"
+                      : "text-gray-700 hover:text-purple-600"
+                  }`}
+                  whileHover="hover"
+                >
+                  {item}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400"
+                    initial={{ width: 0 }}
+                    animate={{ width: 0 }}
+                    variants={{
+                      hover: { width: "100%" },
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                </motion.button>
+              ) : (
+                <motion.a
+                  href={`#${item.toLowerCase()}`}
+                  className={`font-medium transition-colors duration-200 relative inline-block ${
+                    theme === "dark"
+                      ? "text-gray-300 hover:text-purple-400"
+                      : "text-gray-700 hover:text-purple-600"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                  whileHover="hover"
+                >
+                  {item}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400"
+                    initial={{ width: 0 }}
+                    animate={{ width: 0 }}
+                    variants={{
+                      hover: { width: "100%" },
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                </motion.a>
+              )}
             </motion.li>
           ))}
 
@@ -250,22 +278,41 @@ const Navbar = () => {
                     }}
                     onClick={() => setIsOpen(false)}
                   >
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      className={`text-2xl font-semibold transition-colors duration-200 relative inline-block ${
-                        theme === "dark"
-                          ? "text-gray-300 hover:text-purple-400"
-                          : "text-gray-700 hover:text-purple-600"
-                      }`}
-                    >
-                      {item}
-                      <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400 w-0 group-hover:w-full transition-all duration-300 ease-out"
-                        initial={{ width: 0 }}
-                        animate={{ width: "0" }}
-                        whileHover={{ width: "100%" }}
-                      />
-                    </a>
+                    {item === "Resume" ? (
+                      <button
+                        onClick={handleResumeClick}
+                        className={`text-2xl font-semibold transition-colors duration-200 relative inline-block ${
+                          theme === "dark"
+                            ? "text-gray-300 hover:text-purple-400"
+                            : "text-gray-700 hover:text-purple-600"
+                        }`}
+                      >
+                        {item}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400 w-0 group-hover:w-full transition-all duration-300 ease-out"
+                          initial={{ width: 0 }}
+                          animate={{ width: "0" }}
+                          whileHover={{ width: "100%" }}
+                        />
+                      </button>
+                    ) : (
+                      <a
+                        href={`#${item.toLowerCase()}`}
+                        className={`text-2xl font-semibold transition-colors duration-200 relative inline-block ${
+                          theme === "dark"
+                            ? "text-gray-300 hover:text-purple-400"
+                            : "text-gray-700 hover:text-purple-600"
+                        }`}
+                      >
+                        {item}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-0.5 bg-purple-500 dark:bg-purple-400 w-0 group-hover:w-full transition-all duration-300 ease-out"
+                          initial={{ width: 0 }}
+                          animate={{ width: "0" }}
+                          whileHover={{ width: "100%" }}
+                        />
+                      </a>
+                    )}
                   </motion.li>
                 ))}
               </motion.ul>
