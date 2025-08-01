@@ -54,7 +54,7 @@ const Hero = () => {
                 1000,
               ]}
               wrapper="span"
-              speed={40}
+              speed={50}
               repeat={Infinity}
             />
           </motion.div>

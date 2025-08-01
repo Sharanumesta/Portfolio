@@ -28,7 +28,7 @@ const dummyProjects = [
     tags: ["React", "Framer Motion", "Tailwind"],
     imageUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d",
     githubUrl: "https://github.com/Sharanumesta/Portfolio",
-    demoUrl: "https://portfolio-sharanu.netlify.app/"
+    demoUrl: "https://sharanumesta.netlify.app"
   },
   // {
   //   title: "Task Manager",
