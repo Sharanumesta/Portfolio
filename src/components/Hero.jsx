@@ -86,7 +86,7 @@ const Hero = () => {
                   : "border-purple-600 hover:bg-purple-600/10 text-purple-700 shadow-purple-400/10"
               }`}
             >
-              <a href="https://drive.google.com/file/d/1W-L0lsvoNRzmdgS7Fsh-XWCaX-ePBqaO/view?usp=drive_link" target="_blank">Download Resume</a>
+              <a href="https://drive.google.com/file/d/1wXLz_hNY0Vcmcxr3XdS-LLQuBM1n3YDF/view?usp=sharing" target="_blank">Download Resume</a>
             </motion.button>
           </motion.div>
         </div>
